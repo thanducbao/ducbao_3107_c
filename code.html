@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Ảnh</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .container{
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 500px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1{
+            margin-bottom: 20px;
+        }
+
+        input{
+            margin: 20px 0;
+        }
+
+        .preview{
+            margin-top: 20px;
+        }
+
+        .preview img{
+            max-width: 100%;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Upload Ảnh</h1>
+
+        <input type="file" id="imageInput" accept="image/*">
+
+        <div class="preview" id="preview"></div>
+    </div>
+
+    <script>
+        const imageInput = document.getElementById("imageInput");
+        const preview = document.getElementById("preview");
+
+        imageInput.addEventListener("change", function() {
+            const file = this.files[0];
+
+            if(file){
+                const reader = new FileReader();
+
+                reader.onload = function(e){
+                    preview.innerHTML = `
+                        <h3>Ảnh đã tải lên:</h3>
+                        <img src="${e.target.result}">
+                    `;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+</body>
+</html>
